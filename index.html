@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Horn - VLV Combine Prep System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #1A1A1A; color: #FFF; line-height: 1.6; }
+        .nav { background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%); border-bottom: 3px solid #F5C842; position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-around; padding: 0; }
+        .nav-btn { flex: 1; padding: 18px 16px; background: none; border: none; color: #B0B0B0; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border-bottom: 3px solid transparent; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-btn:hover { color: #F5C842; background: rgba(245, 200, 66, 0.1); }
+        .nav-btn.active { color: #F5C842; border-bottom-color: #F5C842; background: rgba(245, 200, 66, 0.05); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .hero { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%); border-radius: 20px; margin-bottom: 30px; border: 2px solid #3A3A3A; }
+        .logo { max-width: 300px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 30px rgba(245, 200, 66, 0.5)); animation: logoGlow 3s ease-in-out infinite alternate; }
+        @keyframes logoGlow { 0% { filter: drop-shadow(0 0 20px rgba(245, 200, 66, 0.5)); } 100% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); } }
+        .athlete-name { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: #F5C842; letter-spacing: 4px; margin-bottom: 10px; text-shadow: 0 0 30px rgba(245, 200, 66, 0.5); }
+        .section { margin-bottom: 40px; }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #F5C842; margin-bottom: 20px; letter-spacing: 2px; }
+        .card { background: #2A2A2A; padding: 24px; border-radius: 12px; border: 2px solid #3A3A3A; margin-bottom: 20px; }
+        .btn { padding: 14px 28px; background: linear-gradient(135deg, #F5C842 0%, #FFD700 100%); border: none; border-radius: 8px; color: #1A1A1A; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 200, 66, 0.4); }
+        .btn-secondary { background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); color: white; }
+        input, textarea, select { width: 100%; padding: 12px; background: #1A1A1A; border: 2px solid #3A3A3A; border-radius: 8px; color: white; font-size: 15px; font-family: 'Inter', sans-serif; margin-bottom: 12px; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #F5C842; }
+        .macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .macro-card { background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%); padding: 20px; border-radius: 12px; border-top: 4px solid; text-align: center; }
+        .macro-label { font-size: 12px; color: #B0B0B0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .macro-value { font-size: 32px; font-weight: 800; color: #F5C842; margin-bottom: 8px; }
+        .macro-target { font-size: 16px; color: #B0B0B0; }
+        .macro-bar { height: 8px; background: #3A3A3A; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .macro-progress { height: 100%; transition: width 0.3s ease; border-radius: 4px; }
+        .food-log-entry { background: #1A1A1A; padding: 15px; border-radius: 8px; border-left: 3px solid #F5C842; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .food-log-name { font-size: 16px; font-weight: 600; color: #F5C842; margin-bottom: 5px; }
+        .food-log-macros { font-size: 13px; color: #B0B0B0; }
+        .delete-btn { background: #FF5722; border: none; padding: 8px 16px; border-radius: 6px; color: white; cursor: pointer; font-weight: 600; }
+        .delete-btn:hover { background: #E64A19; }
+        .workout-card { background: #2A2A2A; padding: 20px; border-radius: 12px; border-left: 4px solid #F5C842; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; }
+        .workout-card:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2); }
+        .workout-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .workout-title { font-size: 20px; font-weight: 700; color: #F5C842; }
+        .workout-details { margin-top: 15px; padding-top: 15px; border-top: 2px solid #3A3A3A; display: none; }
+        .workout-details.active { display: block; }
+        .exercise-item { background: #1A1A1A; padding: 12px; border-radius: 8px; margin-bottom: 8px; }
+        .exercise-name { font-weight: 600; color: #FFF; margin-bottom: 5px; }
+        .exercise-sets { font-size: 13px; color: #B0B0B0; }
+        .recipe-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .recipe-tab { padding: 12px 24px; background: #2A2A2A; border: 2px solid #3A3A3A; border-radius: 8px; color: #B0B0B0; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .recipe-tab.active { background: #F5C842; color: #1A1A1A; border-color: #F5C842; }
+        .recipe-card { background: #2A2A2A; padding: 20px; border-radius: 12px; border: 2px solid #3A3A3A; margin-bottom: 15px; }
+        @media (max-width: 768px) { .athlete-name { font-size: 36px; } .logo { max-width: 200px; } .nav-btn { font-size: 10px; padding: 14px 8px; } .macro-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+    <div id="root"><div style="display:flex;justify-content:center;align-items:center;min-height:100vh;font-size:24px;color:#F5C842">Loading VLV System...</div></div>
+    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('dashboard');
+            const [foodInput, setFoodInput] = useState('');
+            const [servings, setServings] = useState(1);
+            const [todayFoods, setTodayFoods] = useState([]);
+            const [favorites, setFavorites] = useState([]);
+            const aiInputRef = useRef(null);
+            const [aiInput, setAiInput] = useState('');
+            const [genMeal, setGenMeal] = useState(null);
+            const [recipeFilter, setRecipeFilter] = useState('all');
+            const [mealPlanHistory, setMealPlanHistory] = useState([]);
+            const [currentPlan, setCurrentPlan] = useState(null);
+            const [selectedPhase, setSelectedPhase] = useState('phase1');
+            const [expandedWorkout, setExpandedWorkout] = useState(null);
+            
+            const targets = { calories: 4800, protein: 290, carbs: 700, fat: 120 };
+            
+            const foodDB = {
+                'ground beef': {cal:70,p:6,c:0,f:5,per:'1oz'}, 'chicken breast': {cal:55,p:10,c:0,f:1,per:'1oz'},
+                'chicken thigh': {cal:55,p:7,c:0,f:3,per:'1oz'}, 'pork': {cal:60,p:7,c:0,f:3.5,per:'1oz'},
+                'salmon': {cal:60,p:7,c:0,f:3.5,per:'1oz'}, 'eggs': {cal:70,p:6,c:0.5,f:5,per:'egg'},
+                'whey protein': {cal:120,p:24,c:3,f:1,per:'scoop'}, 'greek yogurt': {cal:130,p:20,c:9,f:2,per:'cup'},
+                'rice': {cal:205,p:4,c:45,f:0,per:'cup'}, 'pasta': {cal:200,p:7,c:39,f:1,per:'cup'},
+                'potatoes': {cal:20,p:0.5,c:4.5,f:0,per:'oz'}, 'bread': {cal:120,p:5,c:23,f:1,per:'2slices'},
+                'oats': {cal:150,p:5,c:27,f:3,per:'0.5cup'}, 'banana': {cal:105,p:1,c:27,f:0,per:'1'},
+                'peanut butter': {cal:94,p:4,c:3.5,f:8,per:'tbsp'}, 'cheese': {cal:114,p:7,c:1,f:9.5,per:'oz'},
+                'milk': {cal:150,p:8,c:12,f:8,per:'cup'}
+            };
+            
+            const recipes = [
+                {name:'Beef Rice Bowls',protein:'Beef',cal:720,p:48,c:90,f:19,servings:12,
+                 ingredients:['6lb ground beef','8 cups rice','beans','salsa'],
+                 instructions:['Brown beef','Cook rice','Mix','Portion']},
+                {name:'Chicken Alfredo',protein:'Chicken',cal:780,p:54,c:78,f:26,servings:12,
+                 ingredients:['6lb chicken','3lb pasta','alfredo'],
+                 instructions:['Bake chicken','Cook pasta','Mix']},
+                {name:'BBQ Pork',protein:'Pork',cal:660,p:49,c:54,f:24,servings:12,
+                 ingredients:['9lb pork','BBQ sauce','potatoes'],
+                 instructions:['Slow cook','Shred','Roast potatoes']},
+                {name:'Salmon Rice',protein:'Fish',cal:580,p:42,c:68,f:14,servings:8,
+                 ingredients:['4lb salmon','rice','asparagus'],
+                 instructions:['Bake salmon','Cook rice']},
+                {name:'Beef Burritos',protein:'Beef',cal:680,p:44,c:75,f:22,servings:10,
+                 ingredients:['5lb beef','rice','beans'],
+                 instructions:['Season beef','Cook rice','Assemble']},
+                {name:'Chicken Teriyaki',protein:'Chicken',cal:640,p:48,c:72,f:14,servings:10,
+                 ingredients:['6lb chicken','rice','teriyaki'],
+                 instructions:['Cube chicken','Cook rice','Mix']}
+            ];
+            
+            const workouts = {
+                phase1: {
+                    name: 'Phase 1 - Acceleration Base',
+                    workouts: [
+                        {day:'Monday',type:'Acceleration + Lower A',
+                         exercises:[{name:'3-Point Starts',sets:'3×10yd'},{name:'Safety Bar Box Squat',sets:'5×3@80-85%'},{name:'Trap Bar DL',sets:'4×3@82-85%'}]},
+                        {day:'Tuesday',type:'Upper A + Sled',
+                         exercises:[{name:'Bench Press',sets:'6×2@85%'},{name:'Rows',sets:'4×8'},{name:'Sled Work',sets:'8×20yd'}]},
+                        {day:'Thursday',type:'MaxV + Lower B',
+                         exercises:[{name:'Wickets',sets:'5 passes@70-80%'},{name:'Trap Bar DL',sets:'5×2@85%'},{name:'Nordic Curls',sets:'4×4'}]},
+                        {day:'Saturday',type:'Upper B',
+                         exercises:[{name:'Close-Grip Bench',sets:'4×4@80%'},{name:'Cable Rows',sets:'4×10'},{name:'Landmine Press',sets:'3×6'}]}
+                    ]
+                }
+            };
+            
+            useEffect(() => {
+                const savedDate = localStorage.getItem('lastDate');
+                const currentDate = new Date().toDateString();
+                if (savedDate !== currentDate) {
+                    localStorage.setItem('lastDate', currentDate);
+                    localStorage.setItem('todayFoods', JSON.stringify([]));
+                    setTodayFoods([]);
+                } else {
+                    const saved = localStorage.getItem('todayFoods');
+                    if (saved) setTodayFoods(JSON.parse(saved));
+                }
+                const savedFavs = localStorage.getItem('favorites');
+                if (savedFavs) setFavorites(JSON.parse(savedFavs));
+            }, []);
+            
+            useEffect(() => { localStorage.setItem('todayFoods', JSON.stringify(todayFoods)); }, [todayFoods]);
+            useEffect(() => { localStorage.setItem('favorites', JSON.stringify(favorites)); }, [favorites]);
+            
+            const calcMacros = () => todayFoods.reduce((t,f) => ({
+                calories:t.calories+f.calories, protein:t.protein+f.protein, 
+                carbs:t.carbs+f.carbs, fat:t.fat+f.fat
+            }), {calories:0,protein:0,carbs:0,fat:0});
+            
+            const addFood = () => {
+                const food = foodDB[foodInput.toLowerCase().trim()];
+                if (!food) { alert('Food not found. Try: chicken breast, rice, eggs'); return; }
+                const s = parseFloat(servings) || 1;
+                setTodayFoods([...todayFoods, {
+                    id:Date.now(), name:foodInput, servings:s,
+                    calories:Math.round(food.cal*s), protein:Math.round(food.p*s),
+                    carbs:Math.round(food.c*s), fat:Math.round(food.f*s), per:food.per
+                }]);
+                setFoodInput(''); setServings(1);
+            };
+            
+            const deleteFood = (id) => setTodayFoods(todayFoods.filter(f => f.id !== id));
+            
+            const saveFav = () => {
+                if (todayFoods.length === 0) { alert('Add foods first!'); return; }
+                const name = prompt('Name this meal:');
+                if (!name) return;
+                const m = calcMacros();
+                setFavorites([...favorites, {id:Date.now(),name,foods:[...todayFoods],...m}]);
+                alert('Saved!');
+            };
+            
+            const loadFav = (fav) => {
+                const newFoods = fav.foods.map(f => ({...f, id:Date.now()+Math.random()}));
+                setTodayFoods([...todayFoods, ...newFoods]);
+            };
+            
+            const generateAI = () => {
+                if (!aiInput.trim()) { alert('Enter ingredients!'); return; }
+                const ings = aiInput.toLowerCase().split(',').map(i => i.trim());
+                const matched = [];
+                ings.forEach(ing => {
+                    const m = Object.keys(foodDB).filter(k => k.includes(ing) || ing.includes(k.split(' ')[0]));
+                    if (m.length > 0) matched.push(m[0]);
+                });
+                const hasP = matched.some(f => ['beef','chicken','pork','salmon','eggs'].some(p => f.includes(p)));
+                const hasC = matched.some(f => ['rice','pasta','potato','oats','bread'].some(c => f.includes(c)));
+                if (!hasP) matched.unshift('chicken breast');
+                if (!hasC) matched.push('rice');
+                const totals = matched.reduce((a,fn) => {
+                    const f = foodDB[fn];
+                    if (f) { a.calories+=f.cal; a.protein+=f.p; a.carbs+=f.c; a.fat+=f.f; }
+                    return a;
+                }, {calories:0,protein:0,carbs:0,fat:0});
+                setGenMeal({name:'Custom Power Meal',foods:matched,...totals});
+            };
+            
+            const quickMeals = {
+                'Power Breakfast': 'eggs, potatoes, milk',
+                'Classic Bowl': 'chicken breast, rice, cheese',
+                'Pasta Power': 'ground beef, pasta, cheese',
+                'Quick Snack': 'greek yogurt, banana, peanut butter'
+            };
+            
+            const genQuick = (type) => {
+                setAiInput(quickMeals[type]);
+                setTimeout(generateAI, 100);
+            };
+            
+            const gen3Day = () => {
+                const recent = mealPlanHistory.slice(-10).flat();
+                const available = recipes.filter(r => !recent.some(u => u.name === r.name));
+                const use = available.length >= 9 ? available : recipes;
+                const shuffled = [...use].sort(() => Math.random()-0.5).slice(0,9);
+                setCurrentPlan([
+                    {day:'Day 1',meals:shuffled.slice(0,3)},
+                    {day:'Day 2',meals:shuffled.slice(3,6)},
+                    {day:'Day 3',meals:shuffled.slice(6,9)}
+                ]);
+                setMealPlanHistory([...mealPlanHistory, shuffled]);
+            };
+            
+            const todayMacros = calcMacros();
+            
+            const Dashboard = () => (
+                <div className="container">
+                    <div className="hero">
+                        <img src="vlvl16x9.png" alt="VLV Logo" className="logo" />
+                        <h1 className="athlete-name">RYAN HORN</h1>
+                        <p style={{color:'#B0B0B0',fontSize:'18px'}}>12-Week Combine Prep System</p>
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Today's Nutrition</h2>
+                        <div className="macro-grid">
+                            {[
+                                {label:'Calories',val:todayMacros.calories,target:targets.calories,unit:'',color:'#F5C842'},
+                                {label:'Protein',val:todayMacros.protein,target:targets.protein,unit:'g',color:'#4CAF50'},
+                                {label:'Carbs',val:todayMacros.carbs,target:targets.carbs,unit:'g',color:'#4A90E2'},
+                                {label:'Fat',val:todayMacros.fat,target:targets.fat,unit:'g',color:'#FF5722'}
+                            ].map(m => (
+                                <div key={m.label} className="macro-card" style={{borderTopColor:m.color}}>
+                                    <div className="macro-label">{m.label}</div>
+                                    <div className="macro-value">{m.val}</div>
+                                    <div className="macro-target">/ {m.target}{m.unit}</div>
+                                    <div className="macro-bar">
+                                        <div className="macro-progress" style={{
+                                            width:`${Math.min((m.val/m.target)*100,100)}%`,
+                                            backgroundColor:m.color
+                                        }}></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Log Food</h2>
+                        <div className="card">
+                            <input value={foodInput} onChange={(e)=>setFoodInput(e.target.value)}
+                                placeholder="Food name (e.g., chicken breast, rice, eggs)" 
+                                onKeyPress={(e)=>e.key==='Enter'&&addFood()} />
+                            <input type="number" value={servings} onChange={(e)=>setServings(e.target.value)}
+                                placeholder="Servings" step="0.5" min="0.1" />
+                            <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+                                <button className="btn" onClick={addFood}>Add Food</button>
+                                <button className="btn btn-secondary" onClick={saveFav}>Save Favorite</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {favorites.length > 0 && (
+                        <div className="section">
+                            <h3 style={{color:'#F5C842',marginBottom:'15px'}}>Favorite Meals</h3>
+                            {favorites.map(f => (
+                                <div key={f.id} className="food-log-entry">
+                                    <div>
+                                        <div className="food-log-name">{f.name}</div>
+                                        <div className="food-log-macros">
+                                            {f.calories} cal | P: {f.protein}g | C: {f.carbs}g | F: {f.fat}g
+                                        </div>
+                                    </div>
+                                    <button className="btn btn-secondary" onClick={()=>loadFav(f)}>Add</button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    
+                    <div className="section">
+                        <h2 className="section-title">Today's Log</h2>
+                        {todayFoods.length === 0 ? (
+                            <p style={{color:'#B0B0B0'}}>No food logged yet.</p>
+                        ) : (
+                            todayFoods.map(f => (
+                                <div key={f.id} className="food-log-entry">
+                                    <div>
+                                        <div className="food-log-name">{f.name} ({f.servings} × {f.per})</div>
+                                        <div className="food-log-macros">
+                                            {f.calories} cal | P: {f.protein}g | C: {f.carbs}g | F: {f.fat}g
+                                        </div>
+                                    </div>
+                                    <button className="delete-btn" onClick={()=>deleteFood(f.id)}>Delete</button>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+            );
+            
+            const Training = () => {
+                const phase = workouts[selectedPhase];
+                return (
+                    <div className="container">
+                        <h2 className="section-title">Training - {phase.name}</h2>
+                        {phase.workouts.map((w,i) => (
+                            <div key={i} className="workout-card" onClick={()=>setExpandedWorkout(expandedWorkout===i?null:i)}>
+                                <div className="workout-header">
+                                    <div className="workout-title">{w.day} - {w.type}</div>
+                                    <div>{expandedWorkout===i?'▲':'▼'}</div>
+                                </div>
+                                <div className={`workout-details ${expandedWorkout===i?'active':''}`}>
+                                    {w.exercises.map((e,ei) => (
+                                        <div key={ei} className="exercise-item">
+                                            <div className="exercise-name">{e.name}</div>
+                                            <div className="exercise-sets">{e.sets}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                );
+            };
+            
+            const MealPrep = () => {
+                const filtered = recipeFilter==='all' ? recipes : recipes.filter(r=>r.protein.toLowerCase()===recipeFilter);
+                return (
+                    <div className="container">
+                        <h2 className="section-title">Meal Prep Recipes</h2>
+                        <div className="recipe-tabs">
+                            {['all','beef','chicken','pork','fish'].map(f => (
+                                <div key={f} className={`recipe-tab ${recipeFilter===f?'active':''}`} 
+                                    onClick={()=>setRecipeFilter(f)}>
+                                    {f.charAt(0).toUpperCase()+f.slice(1)}
+                                </div>
+                            ))}
+                        </div>
+                        {filtered.map((r,i) => (
+                            <div key={i} className="recipe-card">
+                                <div style={{display:'flex',justifyContent:'space-between',marginBottom:'15px'}}>
+                                    <h3 style={{color:'#F5C842',fontSize:'20px'}}>{r.name}</h3>
+                                    <div style={{textAlign:'right',fontSize:'13px',color:'#B0B0B0'}}>
+                                        <div>{r.servings} meals | {r.cal} cal | P:{r.p}g C:{r.c}g F:{r.f}g</div>
+                                    </div>
+                                </div>
+                                <h4 style={{color:'#F5C842',marginBottom:'10px'}}>Ingredients:</h4>
+                                <ul style={{color:'#B0B0B0',paddingLeft:'20px',marginBottom:'15px'}}>
+                                    {r.ingredients.map((ing,ii)=><li key={ii}>{ing}</li>)}
+                                </ul>
+                                <h4 style={{color:'#F5C842',marginBottom:'10px'}}>Instructions:</h4>
+                                <ol style={{color:'#B0B0B0',paddingLeft:'20px'}}>
+                                    {r.instructions.map((step,si)=><li key={si}>{step}</li>)}
+                                </ol>
+                            </div>
+                        ))}
+                    </div>
+                );
+            };
+            
+            const Planner = () => (
+                <div className="container">
+                    <h2 className="section-title">3-Day Meal Planner</h2>
+                    <div className="card">
+                        <p style={{color:'#B0B0B0',marginBottom:'15px'}}>
+                            Generates unique plans - no repeats within last 10 generations!
+                        </p>
+                        <button className="btn" onClick={gen3Day}>Generate 3-Day Plan</button>
+                    </div>
+                    {currentPlan && currentPlan.map((d,i) => (
+                        <div key={i} className="card">
+                            <h3 style={{color:'#F5C842',marginBottom:'15px'}}>{d.day}</h3>
+                            {d.meals.map((m,mi) => (
+                                <div key={mi} style={{marginBottom:'15px',paddingBottom:'15px',borderBottom:mi<2?'1px solid #3A3A3A':'none'}}>
+                                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                                        <strong style={{color:'#FFF'}}>{m.name}</strong>
+                                        <span style={{color:'#B0B0B0',fontSize:'14px'}}>
+                                            {m.cal} cal | P:{m.p}g C:{m.c}g F:{m.f}g
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            );
+            
+            const AIGen = () => (
+                <div className="container">
+                    <h2 className="section-title">AI Meal Generator</h2>
+                    <div className="card">
+                        <input ref={aiInputRef} value={aiInput} onChange={(e)=>setAiInput(e.target.value)}
+                            placeholder="e.g., chicken, rice, eggs, cheese"
+                            onKeyPress={(e)=>e.key==='Enter'&&generateAI()} />
+                        <button className="btn" onClick={generateAI}>Generate Meal</button>
+                    </div>
+                    <div className="section">
+                        <h3 style={{color:'#F5C842',fontSize:'24px',marginBottom:'15px'}}>Quick Presets</h3>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'15px'}}>
+                            {Object.keys(quickMeals).map(m => (
+                                <div key={m} className="recipe-card" style={{cursor:'pointer'}} onClick={()=>genQuick(m)}>
+                                    <h4 style={{color:'#F5C842',marginBottom:'5px'}}>{m}</h4>
+                                    <p style={{color:'#B0B0B0',fontSize:'13px'}}>{quickMeals[m]}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    {genMeal && (
+                        <div className="card" style={{border:'2px solid #F5C842'}}>
+                            <h3 style={{color:'#F5C842',marginBottom:'15px'}}>{genMeal.name}</h3>
+                            <h4 style={{marginBottom:'10px'}}>Ingredients:</h4>
+                            {genMeal.foods.map((f,i) => (
+                                <div key={i} style={{color:'#B0B0B0',padding:'8px',background:'#1A1A1A',borderRadius:'6px',marginBottom:'5px'}}>
+                                    {f}
+                                </div>
+                            ))}
+                            <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'15px',marginTop:'20px'}}>
+                                {[
+                                    {label:'CALORIES',val:genMeal.calories},
+                                    {label:'PROTEIN',val:genMeal.protein+'g'},
+                                    {label:'CARBS',val:genMeal.carbs+'g'},
+                                    {label:'FAT',val:genMeal.fat+'g'}
+                                ].map(m => (
+                                    <div key={m.label} style={{textAlign:'center',padding:'15px',background:'#1A1A1A',borderRadius:'8px'}}>
+                                        <div style={{fontSize:'12px',color:'#B0B0B0',marginBottom:'5px'}}>{m.label}</div>
+                                        <div style={{fontSize:'24px',fontWeight:'800',color:'#F5C842'}}>{m.val}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+            
+            return (
+                <div>
+                    <nav className="nav">
+                        <div className="nav-content">
+                            {['dashboard','training','mealprep','planner','ai'].map(tab => (
+                                <button key={tab} className={`nav-btn ${activeTab===tab?'active':''}`} 
+                                    onClick={()=>setActiveTab(tab)}>
+                                    {tab==='dashboard'?'Nutrition':tab==='ai'?'AI Generator':tab.charAt(0).toUpperCase()+tab.slice(1)}
+                                </button>
+                            ))}
+                        </div>
+                    </nav>
+                    {activeTab==='dashboard' && <Dashboard />}
+                    {activeTab==='training' && <Training />}
+                    {activeTab==='mealprep' && <MealPrep />}
+                    {activeTab==='planner' && <Planner />}
+                    {activeTab==='ai' && <AIGen />}
+                </div>
+            );
+        };
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
