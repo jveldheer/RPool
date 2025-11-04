@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Horn - VLV Elite Combine & Nutrition System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%); 
+            color: #FFF; 
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .nav { 
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%); 
+            border-bottom: 3px solid #F5C842; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        .nav-content { 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 0; 
+        }
+        .nav-btn { 
+            flex: 1; 
+            padding: 20px 16px; 
+            background: none; 
+            border: none; 
+            color: #B0B0B0; 
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border-bottom: 3px solid transparent; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            position: relative;
+        }
+        .nav-btn:hover { 
+            color: #F5C842; 
+            background: rgba(245, 200, 66, 0.1); 
+        }
+        .nav-btn.active { 
+            color: #F5C842; 
+            border-bottom-color: #F5C842; 
+            background: rgba(245, 200, 66, 0.05); 
+        }
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #F5C842, transparent);
+            animation: slideIn 0.5s ease;
+        }
+        .container { 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            padding: 30px; 
+        }
+        .hero { 
+            text-align: center; 
+            padding: 50px 20px; 
+            background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%); 
+            border-radius: 20px; 
+            margin-bottom: 40px; 
+            border: 2px solid #3A3A3A; 
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, rgba(245, 200, 66, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .logo { 
+            max-width: 350px; 
+            height: auto; 
+            margin-bottom: 30px; 
+            filter: drop-shadow(0 0 40px rgba(245, 200, 66, 0.6)); 
+            animation: logoGlow 3s ease-in-out infinite alternate; 
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes logoGlow { 
+            0% { filter: drop-shadow(0 0 30px rgba(245, 200, 66, 0.6)); transform: scale(1); } 
+            100% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); transform: scale(1.02); } 
+        }
+        .athlete-name { 
+            font-family: 'Bebas Neue', sans-serif; 
+            font-size: 72px; 
+            color: #F5C842; 
+            letter-spacing: 4px; 
+            margin-bottom: 15px; 
+            text-shadow: 0 0 40px rgba(245, 200, 66, 0.6); 
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 30px rgba(245, 200, 66, 0.6); }
+            100% { text-shadow: 0 0 50px rgba(255, 215, 0, 0.9), 0 0 70px rgba(245, 200, 66, 0.4); }
+        }
+        .athlete-info {
+            font-size: 18px;
+            color: #B0B0B0;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .countdown-item {
+            background: rgba(245, 200, 66, 0.1);
+            border: 2px solid #F5C842;
+            border-radius: 12px;
+            padding: 15px 25px;
+            text-align: center;
+        }
+        .countdown-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #F5C842;
+        }
+        .countdown-label {
+            font-size: 12px;
+            color: #B0B0B0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section { 
+            margin-bottom: 50px; 
+        }
+        .section-title { 
+            font-family: 'Bebas Neue', sans-serif; 
+            font-size: 42px; 
+            color: #F5C842; 
+            margin-bottom: 25px; 
+            letter-spacing: 2px;
+            border-bottom: 3px solid #F5C842;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .card { 
+            background: linear-gradient(135deg, #2A2A2A 0%, #252525 100%); 
+            padding: 30px; 
+            border-radius: 16px; 
+            border: 2px solid #3A3A3A; 
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 200, 66, 0.2);
+        }
+        .btn { 
+            padding: 16px 32px; 
+            background: linear-gradient(135deg, #F5C842 0%, #FFD700 100%); 
+            border: none; 
+            border-radius: 10px; 
+            color: #1A1A1A; 
+            font-size: 16px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(245, 200, 66, 0.3);
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(245, 200, 66, 0.5); 
+        }
+        .btn-secondary { 
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); 
+            color: white; 
+        }
+        input, textarea, select { 
+            width: 100%; 
+            padding: 14px; 
+            background: #1A1A1A; 
+            border: 2px solid #3A3A3A; 
+            border-radius: 10px; 
+            color: white; 
+            font-size: 15px; 
+            font-family: 'Inter', sans-serif; 
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus, select:focus { 
+            outline: none; 
+            border-color: #F5C842;
+            box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.2);
+        }
+        .macro-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 40px; 
+        }
+        .macro-card { 
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%); 
+            padding: 25px; 
+            border-radius: 16px; 
+            border-top: 5px solid; 
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .macro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, rgba(245, 200, 66, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .macro-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .macro-label { 
+            font-size: 12px; 
+            color: #B0B0B0; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            margin-bottom: 10px; 
+        }
+        .macro-value { 
+            font-size: 42px; 
+            font-weight: 900; 
+            color: #F5C842; 
+            margin-bottom: 10px; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .macro-target { 
+            font-size: 18px; 
+            color: #B0B0B0;
+            font-weight: 600;
+        }
+        .macro-bar { 
+            height: 10px; 
+            background: #3A3A3A; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            margin-top: 15px; 
+        }
+        .macro-progress { 
+            height: 100%; 
+            transition: width 0.5s ease; 
+            border-radius: 5px;
+            background: linear-gradient(90deg, #F5C842, #FFD700);
+        }
+        .workout-phase {
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid #F5C842;
+        }
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3A3A3A;
+        }
+        .phase-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #F5C842;
+        }
+        .phase-weeks {
+            background: rgba(245, 200, 66, 0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #F5C842;
+            font-weight: 600;
+        }
+        .workout-card { 
+            background: #2A2A2A; 
+            padding: 25px; 
+            border-radius: 14px; 
+            border-left: 5px solid #F5C842; 
+            margin-bottom: 20px; 
+            cursor: pointer; 
+            transition: all 0.3s;
+            position: relative; 
+        }
+        .workout-card:hover { 
+            transform: translateX(5px); 
+            box-shadow: 0 6px 25px rgba(245, 200, 66, 0.3); 
+        }
+        .workout-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        }
+        .workout-title { 
+            font-size: 24px; 
+            font-weight: 700; 
+            color: #F5C842; 
+        }
+        .workout-day {
+            background: rgba(245, 200, 66, 0.2);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #F5C842;
+            font-weight: 600;
+        }
+        .workout-details { 
+            margin-top: 20px; 
+            padding-top: 20px; 
+            border-top: 2px solid #3A3A3A; 
+            display: none; 
+        }
+        .workout-details.active { 
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exercise-section {
+            margin-bottom: 25px;
+        }
+        .exercise-section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #F5C842;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: rgba(245, 200, 66, 0.1);
+            border-radius: 8px;
+        }
+        .exercise-item { 
+            background: #1A1A1A; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 10px;
+            border: 1px solid #3A3A3A;
+            transition: all 0.2s ease; 
+        }
+        .exercise-item:hover {
+            border-color: #F5C842;
+            transform: translateX(3px);
+        }
+        .exercise-name { 
+            font-weight: 700; 
+            color: #FFF; 
+            margin-bottom: 8px;
+            font-size: 16px; 
+        }
+        .exercise-sets { 
+            font-size: 14px; 
+            color: #B0B0B0;
+            line-height: 1.8; 
+        }
+        .exercise-notes {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .nutrition-timing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .timing-card {
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #3A3A3A;
+            position: relative;
+        }
+        .timing-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .timing-icon {
+            font-size: 28px;
+        }
+        .timing-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #F5C842;
+        }
+        .timing-content {
+            font-size: 14px;
+            color: #B0B0B0;
+            line-height: 1.8;
+        }
+        .meal-plan-day { 
+            background: linear-gradient(135deg, #2A2A2A 0%, #252525 100%); 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin-bottom: 30px; 
+            border: 3px solid #3A3A3A;
+            transition: all 0.3s ease; 
+        }
+        .meal-plan-day:hover {
+            border-color: #F5C842;
+            box-shadow: 0 10px 30px rgba(245, 200, 66, 0.2);
+        }
+        .meal-plan-header { 
+            color: #F5C842; 
+            font-size: 32px; 
+            font-weight: 800; 
+            margin-bottom: 25px; 
+            border-bottom: 3px solid #F5C842; 
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .day-macros {
+            display: flex;
+            gap: 15px;
+            font-size: 16px;
+        }
+        .day-macro {
+            background: rgba(245, 200, 66, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            color: #F5C842;
+        }
+        .meal-item { 
+            background: #1A1A1A; 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-bottom: 15px;
+            border: 2px solid #2A2A2A;
+            transition: all 0.3s ease; 
+        }
+        .meal-item:hover {
+            border-color: #F5C842;
+            transform: translateX(5px);
+        }
+        .meal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .meal-time {
+            background: #F5C842;
+            color: #1A1A1A;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .meal-name { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: #F5C842; 
+            margin-bottom: 12px; 
+        }
+        .meal-description {
+            color: #B0B0B0;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .meal-ingredients {
+            background: #2A2A2A;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .ingredient-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ingredient-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #3A3A3A;
+            color: #CCC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ingredient-list li:last-child {
+            border-bottom: none;
+        }
+        .ingredient-amount {
+            color: #F5C842;
+            font-weight: 600;
+        }
+        .meal-macros { 
+            display: flex; 
+            gap: 20px; 
+            font-size: 15px; 
+            background: rgba(245, 200, 66, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .meal-macro {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .meal-macro-label {
+            color: #888;
+            font-weight: 500;
+        }
+        .meal-macro-value {
+            color: #F5C842;
+            font-weight: 700;
+        }
+        .supplement-schedule {
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 3px solid #F5C842;
+            margin-bottom: 30px;
+        }
+        .supplement-time {
+            background: #1A1A1A;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 5px solid #F5C842;
+        }
+        .supplement-time-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: #F5C842;
+            margin-bottom: 15px;
+        }
+        .supplement-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #2A2A2A;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .supplement-name {
+            color: #FFF;
+            font-weight: 600;
+        }
+        .supplement-dose {
+            color: #F5C842;
+            font-weight: 600;
+        }
+        .recovery-protocol {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .recovery-card {
+            background: #2A2A2A;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #3A3A3A;
+            transition: all 0.3s ease;
+        }
+        .recovery-card:hover {
+            transform: translateY(-3px);
+            border-color: #F5C842;
+        }
+        .recovery-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #F5C842;
+            margin-bottom: 15px;
+        }
+        .recovery-content {
+            color: #B0B0B0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .sprint-mechanics {
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 2px solid #F5C842;
+            margin-bottom: 30px;
+        }
+        .mechanic-section {
+            margin-bottom: 25px;
+        }
+        .mechanic-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #F5C842;
+            margin-bottom: 15px;
+        }
+        .mechanic-cues {
+            background: #1A1A1A;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .cue-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #3A3A3A;
+            color: #CCC;
+            font-size: 15px;
+        }
+        .cue-item:last-child {
+            border-bottom: none;
+        }
+        .cue-important {
+            color: #F5C842;
+            font-weight: 600;
+        }
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            background: #2A2A2A;
+            border: 2px solid #3A3A3A;
+            border-radius: 10px;
+            color: #B0B0B0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        .tab-btn:hover {
+            background: rgba(245, 200, 66, 0.1);
+            border-color: #F5C842;
+        }
+        .tab-btn.active {
+            background: #F5C842;
+            color: #1A1A1A;
+            border-color: #F5C842;
+            box-shadow: 0 4px 15px rgba(245, 200, 66, 0.3);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .progress-tracker {
+            background: linear-gradient(135deg, #2A2A2A 0%, #1f1f1f 100%);
+            padding: 25px;
+            border-radius: 16px;
+            border: 2px solid #3A3A3A;
+            margin-bottom: 30px;
+        }
+        .progress-header {
+            font-size: 24px;
+            font-weight: 700;
+            color: #F5C842;
+            margin-bottom: 20px;
+        }
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #1A1A1A;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .progress-label {
+            color: #CCC;
+            font-weight: 600;
+        }
+        .progress-value {
+            color: #F5C842;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid #FFC107;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .warning-title {
+            color: #FFC107;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .warning-content {
+            color: #CCC;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .success-box {
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .success-title {
+            color: #4CAF50;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) { 
+            .athlete-name { font-size: 48px; } 
+            .logo { max-width: 250px; } 
+            .nav-btn { font-size: 11px; padding: 16px 8px; } 
+            .macro-grid { grid-template-columns: 1fr 1fr; } 
+            .nutrition-timing { grid-template-columns: 1fr; }
+            .recovery-protocol { grid-template-columns: 1fr; }
+            .countdown-timer { flex-wrap: wrap; gap: 15px; }
+            .container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"><div style="display:flex;justify-content:center;align-items:center;min-height:100vh;font-size:28px;color:#F5C842;text-align:center">Loading VLV Elite System...</div></div>
+    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('dashboard');
+            const [expandedWorkout, setExpandedWorkout] = useState(null);
+            const [selectedPhase, setSelectedPhase] = useState('phase1');
+            const [nutritionTab, setNutritionTab] = useState('daily');
+            const [mealPlanDay, setMealPlanDay] = useState('monday');
+            const [combineCountdown, setCombineCountdown] = useState(null);
+            
+            // Calculate countdown to combine (example date)
+            useEffect(() => {
+                const calculateCountdown = () => {
+                    const combineDate = new Date('2024-03-15'); // Example date
+                    const now = new Date();
+                    const diff = combineDate - now;
+                    
+                    if (diff > 0) {
+                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        
+                        setCombineCountdown({ days, hours, minutes });
+                    }
+                };
+                
+                calculateCountdown();
+                const timer = setInterval(calculateCountdown, 60000);
+                return () => clearInterval(timer);
+            }, []);
+            
+            // Enhanced nutrition targets for a 17-18 year old offensive lineman
+            const nutritionTargets = {
+                calories: 4800,
+                protein: 290, // 1.5g per lb for 193 lbs
+                carbs: 700,   // High carbs for energy and recovery
+                fat: 120,     // Healthy fats for hormone production
+                fiber: 40,
+                water: 170    // oz per day minimum
+            };
+            
+            // Complete training phases from the document
+            const trainingPhases = {
+                phase1: {
+                    title: "Phase 1: Reset and Teach",
+                    weeks: "Week 1",
+                    focus: "Learn starts, light volume, movement quality",
+                    sprintVolume: "30-40 contacts per session",
+                    workouts: {
+                        monday: {
+                            title: "Acceleration + Lower A",
+                            sections: [
+                                {
+                                    title: "Warmup (10-12 min)",
+                                    exercises: [
+                                        { name: "VLV Activation Breathwork", sets: "2 cycles", notes: "2 breaths in through nose, 1 long out through mouth" },
+                                        { name: "VLV Daily Vault Work", sets: "Full sequence", notes: "Hip circles, leg swings, arm circles" },
+                                        { name: "March A", sets: "2 × 15 yd", notes: "High knee march, maintain posture" },
+                                        { name: "Skip A", sets: "2 × 15 yd", notes: "Explosive knee drive" },
+                                        { name: "Skip B", sets: "2 × 15 yd", notes: "Knee drive with extension" },
+                                        { name: "Wall Dribbles", sets: "2 × 10s each (low, mid, high)", notes: "Quick feet, maintain angle" }
+                                    ]
+                                },
+                                {
+                                    title: "Acceleration (18-20 min)",
+                                    exercises: [
+                                        { name: "Falling Starts", sets: "4 × 10 yd", notes: "Nose over toes, push through big toe, eyes down 2-3 yd ahead" },
+                                        { name: "3-Point Starts", sets: "4 × 10 yd", notes: "Weight forward, explosive first step" },
+                                        { name: "2-Point Lean-in Starts", sets: "2 × 15 yd", notes: "Rest 60-90s between 10 yd, 2 min for 15 yd" }
+                                    ]
+                                },
+                                {
+                                    title: "Jumps & Throws (6 min)",
+                                    exercises: [
+                                        { name: "Box Jump", sets: "4 × 3", notes: "Full reset between reps, land quiet" },
+                                        { name: "Med Ball Scoop Toss", sets: "3 × 3", notes: "Triple extension, release overhead" }
+                                    ]
+                                },
+                                {
+                                    title: "Lower A Strength (20-22 min)",
+                                    exercises: [
+                                        { name: "Safety-bar Box Squat", sets: "4 × 4 @ RPE 7", notes: "Just above parallel, 3-1-1 tempo" },
+                                        { name: "Trap Bar Deadlift (High Handles)", sets: "3 × 5 @ RPE 7", notes: "Maintain neutral spine" },
+                                        { name: "Reverse Lunge to Box", sets: "3 × 8/side", notes: "Control descent, drive through front heel" }
+                                    ]
+                                },
+                                {
+                                    title: "Armor Finisher (6-8 min)",
+                                    exercises: [
+                                        { name: "Suitcase Carry", sets: "3 × 30 yd/side", notes: "Heavy, maintain upright posture" },
+                                        { name: "Tibialis Raises", sets: "3 × 20", notes: "Full range of motion, control tempo" }
+                                    ]
+                                },
+                                {
+                                    title: "Cool-down (6 min)",
+                                    exercises: [
+                                        { name: "Empty-bar RDL", sets: "2 × 10 slow", notes: "Focus on hamstring stretch" },
+                                        { name: "VLV Recovery Breathwork", sets: "4 min", notes: "4s in, 6s out, relax completely" }
+                                    ]
+                                }
+                            ]
+                        },
+                        tuesday: {
+                            title: "Upper A + Sled",
+                            sections: [
+                                {
+                                    title: "Warmup",
+                                    exercises: [
+                                        { name: "Shoulder CARs", sets: "1 × 8", notes: "Controlled articular rotations" },
+                                        { name: "Band Pull-apart", sets: "2 × 20", notes: "Squeeze shoulder blades" },
+                                        { name: "Wall Slides", sets: "2 × 12", notes: "Maintain contact with wall" }
+                                    ]
+                                },
+                                {
+                                    title: "Main Lift",
+                                    exercises: [
+                                        { name: "Bench Press (Pause)", sets: "5 × 3 @ ~80%", notes: "1 second pause at chest" },
+                                        { name: "Chest-supported Row", sets: "4 × 8", notes: "Full squeeze at top" },
+                                        { name: "Half-kneeling Landmine Press", sets: "3 × 8/side", notes: "Core tight, drive through" },
+                                        { name: "Face Pulls", sets: "3 × 20", notes: "Pull to face level, external rotation" }
+                                    ]
+                                },
+                                {
+                                    title: "Sled Armor",
+                                    exercises: [
+                                        { name: "Backward Sled Drag", sets: "6 × 20 yd", notes: "Steady moderate pace, full leg extension" }
+                                    ]
+                                },
+                                {
+                                    title: "Cool-down",
+                                    exercises: [
+                                        { name: "Open Book", sets: "2 × 8/side", notes: "T-spine mobility" },
+                                        { name: "Recovery Breathing", sets: "4 min", notes: "Parasympathetic activation" }
+                                    ]
+                                }
+                            ]
+                        },
+                        thursday: {
+                            title: "MaxV Intro + Lower B",
+                            sections: [
+                                {
+                                    title: "MaxV Mechanics",
+                                    exercises: [
+                                        { name: "Wall Switches", sets: "3 × 10s", notes: "Quick switches, maintain angle" },
+                                        { name: "Wickets Walk-in", sets: "4 passes @ 60-70%", notes: "12-13 ft spacing" },
+                                        { name: "Build-ups", sets: "2 × 20 yd @ 70%", notes: "Progressive acceleration" }
+                                    ]
+                                },
+                                {
+                                    title: "Jumps",
+                                    exercises: [
+                                        { name: "Pogo Jumps", sets: "3 × 10", notes: "Stiff ankles, minimal ground contact" }
+                                    ]
+                                },
+                                {
+                                    title: "Lower B Lift",
+                                    exercises: [
+                                        { name: "Trap Bar Deadlift", sets: "5 × 3 @ ~80%", notes: "Bar speed crisp" },
+                                        { name: "Hatfield Split Squat to Box", sets: "3 × 6/side", notes: "2-1-2 tempo" },
+                                        { name: "DB RDL", sets: "3 × 8", notes: "Push hips back, slight knee bend" },
+                                        { name: "Nordic Curl", sets: "3 × 3 @ RPE 6-7", notes: "Slow descent, assisted up if needed" }
+                                    ]
+                                },
+                                {
+                                    title: "Core",
+                                    exercises: [
+                                        { name: "Ab Wheel", sets: "3 × 8-10", notes: "Maintain neutral spine" }
+                                    ]
+                                },
+                                {
+                                    title: "Cool-down",
+                                    exercises: [
+                                        { name: "Calf Stretch off Step", sets: "2 × 45s", notes: "Each leg" },
+                                        { name: "Recovery Breathing", sets: "4 min", notes: "Focus on relaxation" }
+                                    ]
+                                }
+                            ]
+                        },
+                        saturday: {
+                            title: "Upper B + Isometrics",
+                            sections: [
+                                {
+                                    title: "Main Lift",
+                                    exercises: [
+                                        { name: "Incline DB Bench", sets: "4 × 6 @ RPE 7", notes: "45-degree angle" },
+                                        { name: "1-arm DB Row", sets: "4 × 10/side", notes: "Full stretch and squeeze" },
+                                        { name: "Dips or Weighted Push-ups", sets: "3 × 8", notes: "Control descent" },
+                                        { name: "Mid-thigh Pull vs Pins", sets: "4 × 5s", notes: "Maximum force production" },
+                                        { name: "Spanish Squat Hold", sets: "3 × 30-45s", notes: "Band behind knees" },
+                                        { name: "Pallof Press", sets: "3 × 12/side", notes: "Resist rotation" }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                phase2: {
+                    title: "Phase 2: Acceleration Base",
+                    weeks: "Weeks 2-4",
+                    focus: "Build 10-20 yd speed and joint capacity",
+                    sprintVolume: "Week 2: 40-50, Week 3: 50-55, Week 4: 55-60",
+                    workouts: {
+                        monday: {
+                            title: "Acceleration + Lower A",
+                            sections: [
+                                {
+                                    title: "Acceleration Menu",
+                                    exercises: [
+                                        { name: "Wall Shin Angle Holds", sets: "2 × 8s in 3 positions", notes: "45°, 60°, 75° angles" },
+                                        { name: "2-Point Starts", sets: "3 × 10 yd", notes: "Focus on projection angle" },
+                                        { name: "3-Point Starts", sets: "3 × 10 yd", notes: "Explosive drive phase" },
+                                        { name: "Split 10+10 yd", sets: "3 reps", notes: "Full reset between 10s" },
+                                        { name: "Light Sled Sprints (Optional)", sets: "4 × 10 yd", notes: "10-15% body mass on sled" }
+                                    ]
+                                },
+                                {
+                                    title: "Jumps",
+                                    exercises: [
+                                        { name: "Seated Box Jump", sets: "4 × 3", notes: "No momentum, pure concentric" }
+                                    ]
+                                },
+                                {
+                                    title: "Lower Lift",
+                                    exercises: [
+                                        { name: "Safety-bar Box Squat", sets: "5 × 3 @ 80-85%", notes: "2-3 min rest" },
+                                        { name: "Trap Bar Deadlift (High)", sets: "4 × 3 @ 82-85%", notes: "Speed off floor" },
+                                        { name: "Single-leg RDL", sets: "3 × 8/side", notes: "Balance and control" }
+                                    ]
+                                },
+                                {
+                                    title: "Carry",
+                                    exercises: [
+                                        { name: "Suitcase Carry", sets: "3 × 40 yd/side", notes: "Heavy load, upright posture" }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                phase3: {
+                    title: "Phase 3: Accel + MaxV Build",
+                    weeks: "Weeks 5-7",
+                    focus: "Add wickets and flying 10s, submax strength with high bar speed",
+                    sprintVolume: "Week 5: 55-65, Week 6: 60-70, Week 7: 65-70",
+                    workouts: {
+                        monday: {
+                            title: "Acceleration + Lower A",
+                            sections: [
+                                {
+                                    title: "Acceleration",
+                                    exercises: [
+                                        { name: "3-Point Starts", sets: "5 × 10 yd", notes: "Maximum intent" },
+                                        { name: "2-Point Starts", sets: "2 × 15 yd", notes: "Maintain angles longer" },
+                                        { name: "Full Sprints", sets: "3 × 20 yd", notes: "Complete acceleration" },
+                                        { name: "Tethered Sled Sprints", sets: "6 × 10 yd", notes: "Light resistance" }
+                                    ]
+                                },
+                                {
+                                    title: "Jumps",
+                                    exercises: [
+                                        { name: "Broad Jump", sets: "4 × 3", notes: "Maximum distance, stick landing" }
+                                    ]
+                                },
+                                {
+                                    title: "Lower Lift",
+                                    exercises: [
+                                        { name: "Safety-bar Box Squat", sets: "6 × 2 @ 85-88%", notes: "Crisp, explosive" },
+                                        { name: "Trap Bar Deadlift", sets: "4 × 2 @ 85-90%", notes: "Maximum bar speed" },
+                                        { name: "Reverse Lunge to Box", sets: "3 × 6/side", notes: "Explosive drive up" }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            };
+            
+            // Extremely detailed daily meal plans with timing and methodology
+            const detailedMealPlans = {
+                monday: {
+                    title: "Monday - Heavy Training Day",
+                    totalMacros: { calories: 4850, protein: 295, carbs: 710, fat: 125 },
+                    meals: [
+                        {
+                            time: "6:00 AM",
+                            name: "Pre-Training Power Breakfast",
+                            description: "High-carb, moderate protein meal to fuel morning acceleration work. Consumed 90-120 minutes before training for optimal digestion.",
+                            ingredients: [
+                                { item: "Steel-cut oats", amount: "1.5 cups cooked", macros: "Cal: 300, P: 10g, C: 54g, F: 6g" },
+                                { item: "Whole eggs", amount: "3 large", macros: "Cal: 210, P: 18g, C: 1.5g, F: 15g" },
+                                { item: "Egg whites", amount: "1/2 cup", macros: "Cal: 68, P: 16g, C: 0g, F: 0g" },
+                                { item: "Banana", amount: "1 large", macros: "Cal: 105, P: 1g, C: 27g, F: 0g" },
+                                { item: "Almond butter", amount: "2 tbsp", macros: "Cal: 190, P: 7g, C: 7g, F: 16g" },
+                                { item: "Whole grain toast", amount: "2 slices", macros: "Cal: 160, P: 8g, C: 30g, F: 2g" }
+                            ],
+                            totalMacros: { calories: 1033, protein: 60, carbs: 119.5, fat: 39 },
+                            notes: "Eat slowly, chew thoroughly. Hydrate with 20-24 oz water with electrolytes."
+                        },
+                        {
+                            time: "7:30 AM",
+                            name: "Pre-Workout Fuel",
+                            description: "Quick-digesting carbs and amino acids 30 minutes before training",
+                            ingredients: [
+                                { item: "White rice cakes", amount: "2 large", macros: "Cal: 70, P: 1g, C: 16g, F: 0g" },
+                                { item: "Honey", amount: "1 tbsp", macros: "Cal: 64, P: 0g, C: 17g, F: 0g" },
+                                { item: "Amino Complex", amount: "1 scoop", macros: "Cal: 10, P: 2g, C: 0g, F: 0g" },
+                                { item: "Catalyte", amount: "1 scoop in 16 oz water", macros: "Cal: 25, P: 0g, C: 6g, F: 0g" }
+                            ],
+                            totalMacros: { calories: 169, protein: 3, carbs: 39, fat: 0 },
+                            notes: "Sip throughout warm-up. Begin hydration protocol."
+                        },
+                        {
+                            time: "10:00 AM",
+                            name: "Post-Training Recovery Shake",
+                            description: "Immediate post-workout nutrition within 30 minutes to maximize recovery",
+                            ingredients: [
+                                { item: "Whey protein isolate", amount: "50g (2 scoops)", macros: "Cal: 200, P: 40g, C: 6g, F: 2g" },
+                                { item: "Whole milk", amount: "16 oz", macros: "Cal: 300, P: 16g, C: 24g, F: 16g" },
+                                { item: "Frozen mixed berries", amount: "1 cup", macros: "Cal: 70, P: 1g, C: 17g, F: 0g" },
+                                { item: "Dextrose powder", amount: "30g", macros: "Cal: 120, P: 0g, C: 30g, F: 0g" }
+                            ],
+                            totalMacros: { calories: 690, protein: 57, carbs: 77, fat: 18 },
+                            notes: "Consume within 30 min post-training. Follow with 20 oz water."
+                        },
+                        {
+                            time: "12:30 PM",
+                            name: "Power Lunch",
+                            description: "Balanced macro meal for sustained energy and continued recovery",
+                            ingredients: [
+                                { item: "Grilled chicken breast", amount: "8 oz", macros: "Cal: 440, P: 80g, C: 0g, F: 8g" },
+                                { item: "White jasmine rice", amount: "1.5 cups cooked", macros: "Cal: 308, P: 6g, C: 68g, F: 0g" },
+                                { item: "Sweet potato", amount: "6 oz", macros: "Cal: 150, P: 3g, C: 36g, F: 0g" },
+                                { item: "Green beans", amount: "1.5 cups", macros: "Cal: 52, P: 3g, C: 12g, F: 0g" },
+                                { item: "Olive oil", amount: "1 tbsp", macros: "Cal: 120, P: 0g, C: 0g, F: 14g" }
+                            ],
+                            totalMacros: { calories: 1070, protein: 92, carbs: 116, fat: 22 },
+                            notes: "Eat rice first for quick energy, then protein. Chew thoroughly."
+                        },
+                        {
+                            time: "3:30 PM",
+                            name: "Mid-Afternoon Fuel",
+                            description: "Strategic snack to maintain energy and prepare for evening activities",
+                            ingredients: [
+                                { item: "Greek yogurt (2% fat)", amount: "1.5 cups", macros: "Cal: 195, P: 30g, C: 14g, F: 4g" },
+                                { item: "Granola", amount: "1/2 cup", macros: "Cal: 200, P: 5g, C: 35g, F: 6g" },
+                                { item: "Apple", amount: "1 large", macros: "Cal: 95, P: 0g, C: 25g, F: 0g" },
+                                { item: "Mixed nuts", amount: "1/4 cup", macros: "Cal: 170, P: 6g, C: 8g, F: 15g" }
+                            ],
+                            totalMacros: { calories: 660, protein: 41, carbs: 82, fat: 25 },
+                            notes: "Perfect timing for sustained energy through homework/study time."
+                        },
+                        {
+                            time: "6:30 PM",
+                            name: "Champion's Dinner",
+                            description: "Large, balanced meal to support overnight recovery and growth",
+                            ingredients: [
+                                { item: "93/7 Ground beef", amount: "8 oz cooked", macros: "Cal: 560, P: 48g, C: 0g, F: 40g" },
+                                { item: "Whole wheat pasta", amount: "2 cups cooked", macros: "Cal: 400, P: 16g, C: 80g, F: 2g" },
+                                { item: "Marinara sauce", amount: "1 cup", macros: "Cal: 80, P: 2g, C: 16g, F: 2g" },
+                                { item: "Parmesan cheese", amount: "2 tbsp", macros: "Cal: 40, P: 4g, C: 0g, F: 3g" },
+                                { item: "Mixed salad", amount: "2 cups", macros: "Cal: 20, P: 2g, C: 4g, F: 0g" },
+                                { item: "Italian dressing", amount: "2 tbsp", macros: "Cal: 100, P: 0g, C: 2g, F: 10g" }
+                            ],
+                            totalMacros: { calories: 1200, protein: 72, carbs: 102, fat: 57 },
+                            notes: "Eat slowly over 20-30 minutes. Stay hydrated."
+                        },
+                        {
+                            time: "9:00 PM",
+                            name: "Night Recovery Shake",
+                            description: "Slow-digesting protein to support overnight muscle recovery",
+                            ingredients: [
+                                { item: "Casein protein", amount: "40g", macros: "Cal: 160, P: 35g, C: 4g, F: 1g" },
+                                { item: "Almond milk", amount: "12 oz", macros: "Cal: 45, P: 1g, C: 4g, F: 3.5g" },
+                                { item: "Natural peanut butter", amount: "1 tbsp", macros: "Cal: 95, P: 4g, C: 3g, F: 8g" },
+                                { item: "Ground flax seed", amount: "1 tbsp", macros: "Cal: 37, P: 1.3g, C: 2g, F: 3g" }
+                            ],
+                            totalMacros: { calories: 337, protein: 41.3, carbs: 13, fat: 15.5 },
+                            notes: "Consume 30-60 min before bed. Add ice for thickness."
+                        }
+                    ],
+                    hydration: "Minimum 170 oz throughout the day. 20 oz upon waking, 30-40 oz during training, 20 oz with each meal.",
+                    supplements: {
+                        morning: ["Multivitamin", "Vitamin D3 5000IU", "Omega-3 2g", "Probiotics"],
+                        preWorkout: ["Amino Complex", "Catalyte", "Creatine 5g"],
+                        postWorkout: ["Whey Protein", "Glutamine 10g", "Creatine 5g"],
+                        evening: ["Magnesium Glycinate 400mg", "Zinc 15mg", "Casein Protein"]
+                    }
+                }
+            };
+            
+            // Detailed nutrition methodology
+            const nutritionMethodology = {
+                principles: [
+                    {
+                        title: "Nutrient Timing Strategy",
+                        content: "Optimize performance and recovery through strategic meal timing. Pre-training: 2-3 hours before with moderate protein, high carbs, low fat. During training: Simple carbs and electrolytes. Post-training: Fast protein and carbs within 30 minutes. Every 3-4 hours: Balanced meals to maintain anabolic state."
+                    },
+                    {
+                        title: "Macronutrient Distribution",
+                        content: "Protein: 1.5g per pound bodyweight (290g for 193 lbs) split across 6-7 servings. Carbohydrates: 3.5-4g per pound (700g) with emphasis around training. Fats: 0.6g per pound (120g) from quality sources. Higher carbs on training days, moderate on recovery days."
+                    },
+                    {
+                        title: "Hydration Protocol",
+                        content: "Baseline: 0.75-1 oz per pound bodyweight (145-193 oz). Training days: Add 20-30 oz. For every pound lost in training: 16-24 oz replacement. Electrolytes: 2-3g sodium, 3-4g potassium, 400-600mg magnesium daily."
+                    },
+                    {
+                        title: "Food Quality Standards",
+                        content: "80% whole, minimally processed foods. Grass-fed/organic proteins when possible. Complex carbs from whole grains, fruits, vegetables. Healthy fats from nuts, seeds, avocados, olive oil. 20% flexibility for adherence and social situations."
+                    },
+                    {
+                        title: "Recovery Nutrition",
+                        content: "Post-workout window: 0.5g/lb carbs + 0.25g/lb protein within 30 min. Before bed: Slow-digesting protein (casein) with minimal carbs. Morning: Rehydrate immediately with 20-30 oz water + electrolytes."
+                    },
+                    {
+                        title: "Supplement Strategy",
+                        content: "Foundation: Multivitamin, Omega-3s, Vitamin D3, Probiotics. Performance: Creatine monohydrate 5g twice daily, Beta-alanine 3-5g daily. Recovery: Glutamine, BCAAs/EAAs, Magnesium, Zinc. Timing matters: Take fat-soluble vitamins with meals containing fat."
+                    }
+                ]
+            };
+            
+            // Sprint mechanics and cues from document
+            const sprintMechanics = {
+                start: {
+                    title: "3-Point Start Position",
+                    cues: [
+                        "Down hand 1 hand-length behind line",
+                        "Power-side foot 2 foot-lengths behind line", 
+                        "Back foot 3 foot-lengths behind line",
+                        "Hips higher than shoulders",
+                        "Weight 60/40 forward",
+                        "Eyes down 2-3 yards ahead, neck neutral, chin tucked"
+                    ]
+                },
+                first10: {
+                    title: "First 10 Yards",
+                    cues: [
+                        "Push the ground back, do not reach",
+                        "Shins and torso at same angle, about 45°",
+                        "Big arm drive from back hip to front cheek",
+                        "4-6 strong steps, each step slightly taller",
+                        "Maintain forward lean throughout"
+                    ]
+                },
+                acceleration: {
+                    title: "10-20 Yards", 
+                    cues: [
+                        "Keep pushing, do not pop up too soon",
+                        "Maintain forward lean, head stays neutral",
+                        "Progressive rise over 6-8 steps",
+                        "Arms drive elbows back aggressively"
+                    ]
+                },
+                maxVelocity: {
+                    title: "20-40 Yards",
+                    cues: [
+                        "Transition to tall, quick, and stiff",
+                        "Feet under hips, bounce off ground",
+                        "Ribcage stacked over pelvis",
+                        "Vertical shin at ground contact",
+                        "Minimize ground contact time"
+                    ]
+                }
+            };
+            
+            // Recovery protocols from document
+            const recoveryProtocols = {
+                daily: {
+                    title: "Daily Recovery Micro-dose (8-12 min)",
+                    items: [
+                        "Wall ankle mobs 2 × 15/side",
+                        "Tib raises 2 × 20",
+                        "Calf raises slow 2 × 12",
+                        "90/90 hip IR/ER 2 × 45s/side",
+                        "Adductor rocks 2 × 12",
+                        "Hip airplanes to box 2 × 5/side",
+                        "McGill Big 3: bird dog 2 × 8/side, side plank 2 × 30s/side, curl-up 2 × 10"
+                    ]
+                },
+                postTraining: {
+                    title: "Post-Training Recovery",
+                    hardDay: [
+                        "Walk 5-8 min easy",
+                        "Soft tissue lower body full pass",
+                        "Banded ankle mobility 2 × 60s/side",
+                        "90/90 hip stretch 2 × 45s/side", 
+                        "Empty bar RDL 2 × 10 slow",
+                        "VLV Recovery breathing 4 min"
+                    ],
+                    moderateDay: [
+                        "Upper body soft tissue (pecs, lats, shoulders)",
+                        "Wall slides 3 × 12",
+                        "Open books 2 × 8/side",
+                        "Face pulls 3 × 20",
+                        "10 min easy walk"
+                    ]
+                }
+            };
+            
+            const Dashboard = () => (
+                <div className="container">
+                    <div className="hero">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFBMUExQSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQmViYXMgTmV1ZSIgZm9udC1zaXplPSI0OCIgZmlsbD0iI0Y1Qzg0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxPR088L3RleHQ+PC9zdmc+" alt="VLV" className="logo" />
+                        <h1 className="athlete-name">RYAN HORN</h1>
+                        <div className="athlete-info">17-18 Year Old LT | 193 lbs | All-American Combine Prep</div>
+                        {combineCountdown && (
+                            <div className="countdown-timer">
+                                <div className="countdown-item">
+                                    <div className="countdown-number">{combineCountdown.days}</div>
+                                    <div className="countdown-label">Days</div>
+                                </div>
+                                <div className="countdown-item">
+                                    <div className="countdown-number">{combineCountdown.hours}</div>
+                                    <div className="countdown-label">Hours</div>
+                                </div>
+                                <div className="countdown-item">
+                                    <div className="countdown-number">{combineCountdown.minutes}</div>
+                                    <div className="countdown-label">Minutes</div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Daily Nutrition Targets</h2>
+                        <div className="macro-grid">
+                            <div className="macro-card" style={{borderTopColor: '#F5C842'}}>
+                                <div className="macro-label">Calories</div>
+                                <div className="macro-value">4,800</div>
+                                <div className="macro-target">Daily Target</div>
+                                <div className="macro-bar">
+                                    <div className="macro-progress" style={{width: '75%'}}></div>
+                                </div>
+                            </div>
+                            <div className="macro-card" style={{borderTopColor: '#FF6B6B'}}>
+                                <div className="macro-label">Protein</div>
+                                <div className="macro-value">290g</div>
+                                <div className="macro-target">1.5g per lb</div>
+                                <div className="macro-bar">
+                                    <div className="macro-progress" style={{width: '80%', background: 'linear-gradient(90deg, #FF6B6B, #FF8787)'}}></div>
+                                </div>
+                            </div>
+                            <div className="macro-card" style={{borderTopColor: '#4ECDC4'}}>
+                                <div className="macro-label">Carbs</div>
+                                <div className="macro-value">700g</div>
+                                <div className="macro-target">3.6g per lb</div>
+                                <div className="macro-bar">
+                                    <div className="macro-progress" style={{width: '70%', background: 'linear-gradient(90deg, #4ECDC4, #6FE7DF)'}}></div>
+                                </div>
+                            </div>
+                            <div className="macro-card" style={{borderTopColor: '#95E1D3'}}>
+                                <div className="macro-label">Fat</div>
+                                <div className="macro-value">120g</div>
+                                <div className="macro-target">0.6g per lb</div>
+                                <div className="macro-bar">
+                                    <div className="macro-progress" style={{width: '65%', background: 'linear-gradient(90deg, #95E1D3, #B4F0E5)'}}></div>
+                                </div>
+                            </div>
+                            <div className="macro-card" style={{borderTopColor: '#6C5CE7'}}>
+                                <div className="macro-label">Fiber</div>
+                                <div className="macro-value">40g</div>
+                                <div className="macro-target">Minimum Daily</div>
+                                <div className="macro-bar">
+                                    <div className="macro-progress" style={{width: '85%', background: 'linear-gradient(90deg, #6C5CE7, #8B7FFF)'}}></div>
+                                </div>
+                            </div>
+                            <div className="macro-card" style={{borderTopColor: '#4A90E2'}}>
+                                <div className="macro-label">Water</div>
+                                <div className="macro-value">170 oz</div>
+                                <div className="macro-target">Minimum Daily</div>
+                                <div className="macro-bar">
+                                    <div className="macro-progress" style={{width: '60%', background: 'linear-gradient(90deg, #4A90E2, #69A8FF)'}}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Nutrition Timing Strategy</h2>
+                        <div className="nutrition-timing">
+                            <div className="timing-card">
+                                <div className="timing-header">
+                                    <span className="timing-icon">🌅</span>
+                                    <h3 className="timing-title">Pre-Training</h3>
+                                </div>
+                                <div className="timing-content">
+                                    <strong>2-3 hours before:</strong> Full meal with 60-80g carbs, 40-50g protein, minimal fat<br/>
+                                    <strong>30-45 min before:</strong> 20-30g quick carbs, amino acids, electrolytes<br/>
+                                    <strong>Hydration:</strong> 20-24 oz water with Catalyte
+                                </div>
+                            </div>
+                            <div className="timing-card">
+                                <div className="timing-header">
+                                    <span className="timing-icon">🏋️</span>
+                                    <h3 className="timing-title">During Training</h3>
+                                </div>
+                                <div className="timing-content">
+                                    <strong>For sessions >60 min:</strong> 20-30g carbs in sports drink<br/>
+                                    <strong>Electrolytes:</strong> Sip Catalyte throughout<br/>
+                                    <strong>Goal:</strong> Maintain energy and prevent dehydration
+                                </div>
+                            </div>
+                            <div className="timing-card">
+                                <div className="timing-header">
+                                    <span className="timing-icon">💪</span>
+                                    <h3 className="timing-title">Post-Training</h3>
+                                </div>
+                                <div className="timing-content">
+                                    <strong>0-30 minutes:</strong> 50g whey protein + 60-80g carbs<br/>
+                                    <strong>30-90 minutes:</strong> Full meal with all macros<br/>
+                                    <strong>Recovery:</strong> Glutamine, creatine, electrolytes
+                                </div>
+                            </div>
+                            <div className="timing-card">
+                                <div className="timing-header">
+                                    <span className="timing-icon">🌙</span>
+                                    <h3 className="timing-title">Evening/Night</h3>
+                                </div>
+                                <div className="timing-content">
+                                    <strong>Dinner:</strong> Largest meal, balanced macros<br/>
+                                    <strong>Before bed:</strong> 30-40g casein protein<br/>
+                                    <strong>Supplements:</strong> Magnesium, zinc, recovery stack
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Today's Training Focus</h2>
+                        <div className="progress-tracker">
+                            <div className="progress-header">Week 1 - Phase 1: Reset and Teach</div>
+                            <div className="progress-item">
+                                <span className="progress-label">Sprint Volume Target</span>
+                                <span className="progress-value">30-40 contacts</span>
+                            </div>
+                            <div className="progress-item">
+                                <span className="progress-label">Today's Focus</span>
+                                <span className="progress-value">Acceleration + Lower A</span>
+                            </div>
+                            <div className="progress-item">
+                                <span className="progress-label">Key Emphasis</span>
+                                <span className="progress-value">Movement Quality</span>
+                            </div>
+                            <div className="progress-item">
+                                <span className="progress-label">Recovery Priority</span>
+                                <span className="progress-value">8.5+ hours sleep</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="warning-box">
+                        <div className="warning-title">⚠️ Important Reminders</div>
+                        <div className="warning-content">
+                            • No deep squats - maintain box squat just above parallel<br/>
+                            • Monitor hamstring tightness - skip flying 10s if tight<br/>
+                            • Weight swings >5 lbs in 24h - check hydration and sodium<br/>
+                            • Sleep <8.5 hours - reduce training intensity by 15%
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            const Training = () => (
+                <div className="container">
+                    <div className="section">
+                        <h2 className="section-title">12-Week Combine Training Program</h2>
+                        
+                        <div className="tabs-container">
+                            <button 
+                                className={`tab-btn ${selectedPhase === 'phase1' ? 'active' : ''}`}
+                                onClick={() => setSelectedPhase('phase1')}
+                            >
+                                Phase 1: Reset
+                            </button>
+                            <button 
+                                className={`tab-btn ${selectedPhase === 'phase2' ? 'active' : ''}`}
+                                onClick={() => setSelectedPhase('phase2')}
+                            >
+                                Phase 2: Acceleration
+                            </button>
+                            <button 
+                                className={`tab-btn ${selectedPhase === 'phase3' ? 'active' : ''}`}
+                                onClick={() => setSelectedPhase('phase3')}
+                            >
+                                Phase 3: Build
+                            </button>
+                        </div>
+                        
+                        <div className="workout-phase">
+                            <div className="phase-header">
+                                <div className="phase-title">{trainingPhases[selectedPhase].title}</div>
+                                <div className="phase-weeks">{trainingPhases[selectedPhase].weeks}</div>
+                            </div>
+                            <div style={{marginBottom: '20px', color: '#B0B0B0'}}>
+                                <strong>Focus:</strong> {trainingPhases[selectedPhase].focus}<br/>
+                                <strong>Sprint Volume:</strong> {trainingPhases[selectedPhase].sprintVolume}
+                            </div>
+                            
+                            {Object.entries(trainingPhases[selectedPhase].workouts).map(([day, workout]) => (
+                                <div key={day} className="workout-card" onClick={() => setExpandedWorkout(expandedWorkout === day ? null : day)}>
+                                    <div className="workout-header">
+                                        <div className="workout-title">{workout.title}</div>
+                                        <div className="workout-day">{day.toUpperCase()}</div>
+                                    </div>
+                                    
+                                    <div className={`workout-details ${expandedWorkout === day ? 'active' : ''}`}>
+                                        {workout.sections.map((section, idx) => (
+                                            <div key={idx} className="exercise-section">
+                                                <div className="exercise-section-title">{section.title}</div>
+                                                {section.exercises.map((exercise, i) => (
+                                                    <div key={i} className="exercise-item">
+                                                        <div className="exercise-name">{exercise.name}</div>
+                                                        <div className="exercise-sets">{exercise.sets}</div>
+                                                        {exercise.notes && (
+                                                            <div className="exercise-notes">{exercise.notes}</div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Sprint Mechanics & Cues</h2>
+                        <div className="sprint-mechanics">
+                            {Object.entries(sprintMechanics).map(([key, section]) => (
+                                <div key={key} className="mechanic-section">
+                                    <div className="mechanic-title">{section.title}</div>
+                                    <div className="mechanic-cues">
+                                        {section.cues.map((cue, idx) => (
+                                            <div key={idx} className="cue-item">
+                                                {cue.includes('45°') || cue.includes('60/40') ? (
+                                                    <span className="cue-important">• {cue}</span>
+                                                ) : (
+                                                    <span>• {cue}</span>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="section">
+                        <h2 className="section-title">Recovery Protocols</h2>
+                        <div className="recovery-protocol">
+                            <div className="recovery-card">
+                                <div className="recovery-title">🔄 Daily Micro-dose</div>
+                                <div className="recovery-content">
+                                    {recoveryProtocols.daily.items.map((item, idx) => (
+                                        <div key={idx}>• {item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="recovery-card">
+                                <div className="recovery-title">💪 Post Hard Training</div>
+                                <div className="recovery-content">
+                                    {recoveryProtocols.postTraining.hardDay.map((item, idx) => (
+                                        <div key={idx}>• {item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="recovery-card">
+                                <div className="recovery-title">🏋️ Post Moderate Training</div>
+                                <div className="recovery-content">
+                                    {recoveryProtocols.postTraining.moderateDay.map((item, idx) => (
+                                        <div key={idx}>• {item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            const Nutrition = () => (
+                <div className="container">
+                    <div className="section">
+                        <h2 className="section-title">Complete Nutrition System</h2>
+                        
+                        <div className="tabs-container">
+                            <button 
+                                className={`tab-btn ${nutritionTab === 'daily' ? 'active' : ''}`}
+                                onClick={() => setNutritionTab('daily')}
+                            >
+                                Daily Meal Plan
+                            </button>
+                            <button 
+                                className={`tab-btn ${nutritionTab === 'methodology' ? 'active' : ''}`}
+                                onClick={() => setNutritionTab('methodology')}
+                            >
+                                Methodology
+                            </button>
+                            <button 
+                                className={`tab-btn ${nutritionTab === 'supplements' ? 'active' : ''}`}
+                                onClick={() => setNutritionTab('supplements')}
+                            >
+                                Supplements
+                            </button>
+                        </div>
+                        
+                        <div className={`tab-content ${nutritionTab === 'daily' ? 'active' : ''}`}>
+                            <div className="meal-plan-day">
+                                <div className="meal-plan-header">
+                                    <span>Monday - Heavy Training Day</span>
+                                    <div className="day-macros">
+                                        <span className="day-macro">4,850 cal</span>
+                                        <span className="day-macro">295g protein</span>
+                                        <span className="day-macro">710g carbs</span>
+                                        <span className="day-macro">125g fat</span>
+                                    </div>
+                                </div>
+                                
+                                {detailedMealPlans.monday.meals.map((meal, idx) => (
+                                    <div key={idx} className="meal-item">
+                                        <div className="meal-header">
+                                            <div className="meal-name">{meal.name}</div>
+                                            <div className="meal-time">{meal.time}</div>
+                                        </div>
+                                        <div className="meal-description">{meal.description}</div>
+                                        <div className="meal-ingredients">
+                                            <ul className="ingredient-list">
+                                                {meal.ingredients.map((ing, i) => (
+                                                    <li key={i}>
+                                                        <span>{ing.item}</span>
+                                                        <span className="ingredient-amount">{ing.amount}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="meal-macros">
+                                            <div className="meal-macro">
+                                                <span className="meal-macro-label">Calories:</span>
+                                                <span className="meal-macro-value">{meal.totalMacros.calories}</span>
+                                            </div>
+                                            <div className="meal-macro">
+                                                <span className="meal-macro-label">Protein:</span>
+                                                <span className="meal-macro-value">{meal.totalMacros.protein}g</span>
+                                            </div>
+                                            <div className="meal-macro">
+                                                <span className="meal-macro-label">Carbs:</span>
+                                                <span className="meal-macro-value">{meal.totalMacros.carbs}g</span>
+                                            </div>
+                                            <div className="meal-macro">
+                                                <span className="meal-macro-label">Fat:</span>
+                                                <span className="meal-macro-value">{meal.totalMacros.fat}g</span>
+                                            </div>
+                                        </div>
+                                        {meal.notes && (
+                                            <div style={{marginTop: '15px', padding: '10px', background: '#2A2A2A', borderRadius: '8px', color: '#B0B0B0', fontSize: '14px'}}>
+                                                💡 {meal.notes}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div className={`tab-content ${nutritionTab === 'methodology' ? 'active' : ''}`}>
+                            {nutritionMethodology.principles.map((principle, idx) => (
+                                <div key={idx} className="card">
+                                    <h3 style={{color: '#F5C842', fontSize: '24px', marginBottom: '15px'}}>{principle.title}</h3>
+                                    <p style={{color: '#CCC', lineHeight: '1.8', fontSize: '15px'}}>{principle.content}</p>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className={`tab-content ${nutritionTab === 'supplements' ? 'active' : ''}`}>
+                            <div className="supplement-schedule">
+                                <div className="supplement-time">
+                                    <div className="supplement-time-header">🌅 Morning (With Breakfast)</div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Thorne Multi-Vitamin Elite</span>
+                                        <span className="supplement-dose">2 capsules</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Vitamin D3</span>
+                                        <span className="supplement-dose">5000 IU</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Omega-3 (Fish Oil)</span>
+                                        <span className="supplement-dose">2g EPA/DHA</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Probiotics</span>
+                                        <span className="supplement-dose">50 billion CFU</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="supplement-time">
+                                    <div className="supplement-time-header">🏋️ Pre-Workout (30-45 min before)</div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Amino Complex</span>
+                                        <span className="supplement-dose">1 scoop</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Catalyte</span>
+                                        <span className="supplement-dose">1 scoop in 16 oz water</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Creatine Monohydrate</span>
+                                        <span className="supplement-dose">5g</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Beta-Alanine</span>
+                                        <span className="supplement-dose">3g</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="supplement-time">
+                                    <div className="supplement-time-header">💪 Post-Workout (Within 30 min)</div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Whey Protein Isolate</span>
+                                        <span className="supplement-dose">50g (2 scoops)</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">L-Glutamine</span>
+                                        <span className="supplement-dose">10g</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Creatine Monohydrate</span>
+                                        <span className="supplement-dose">5g</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Dextrose/Carb Powder</span>
+                                        <span className="supplement-dose">30-50g</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="supplement-time">
+                                    <div className="supplement-time-header">🌙 Evening/Before Bed</div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Casein Protein</span>
+                                        <span className="supplement-dose">40g</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Magnesium Glycinate</span>
+                                        <span className="supplement-dose">400mg</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Zinc Picolinate</span>
+                                        <span className="supplement-dose">15mg</span>
+                                    </div>
+                                    <div className="supplement-item">
+                                        <span className="supplement-name">Melatonin (if needed)</span>
+                                        <span className="supplement-dose">3-5mg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            const CombinePrep = () => (
+                <div className="container">
+                    <div className="section">
+                        <h2 className="section-title">Race Week & Combine Day Protocol</h2>
+                        
+                        <div className="card">
+                            <h3 style={{color: '#F5C842', fontSize: '28px', marginBottom: '20px'}}>Final 5 Days Taper</h3>
+                            <div style={{display: 'grid', gap: '15px'}}>
+                                <div className="progress-item">
+                                    <span className="progress-label">5 Days Out</span>
+                                    <span className="progress-value">Flying 10s 2-3 reps only</span>
+                                </div>
+                                <div className="progress-item">
+                                    <span className="progress-label">4 Days Out</span>
+                                    <span className="progress-value">Light lifts: 2×2 bench @80%, 2×2 trap bar @80%</span>
+                                </div>
+                                <div className="progress-item">
+                                    <span className="progress-label">3 Days Out</span>
+                                    <span className="progress-value">3×10 yd starts, 2×20 yd relaxed, mobility only</span>
+                                </div>
+                                <div className="progress-item">
+                                    <span className="progress-label">2 Days Out</span>
+                                    <span className="progress-value">OFF - Walk 20 min, light soft tissue</span>
+                                </div>
+                                <div className="progress-item">
+                                    <span className="progress-label">1 Day Out</span>
+                                    <span className="progress-value">Primer: 2×10 yd relaxed, 2× med ball, 2× pogo</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="card">
+                            <h3 style={{color: '#F5C842', fontSize: '28px', marginBottom: '20px'}}>Race Morning Warmup (25-30 min)</h3>
+                            <ol style={{listStyle: 'none', padding: 0}}>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>1. General Warmup (5 min)</strong><br/>
+                                    Easy jog or brisk walk to raise body temperature
+                                </li>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>2. Dynamic Mobility</strong><br/>
+                                    A-march 2×15 yd, A-skip 2×15 yd, B-skip 2×15 yd, Leg swings 10/side
+                                </li>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>3. Ankle Activation</strong><br/>
+                                    Pogo jumps 2×15 contacts, Wall ankle mobs 1×15/side
+                                </li>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>4. Progressive Build-ups</strong><br/>
+                                    10 yd @70%, 20 yd @80%, 30 yd @85%
+                                </li>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>5. Practice Starts</strong><br/>
+                                    2-3 practice starts at 10 yd
+                                </li>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>6. Rehearsal Run</strong><br/>
+                                    1 × 20 yd at 90% to rehearse race pace
+                                </li>
+                                <li style={{padding: '12px', background: '#1A1A1A', borderRadius: '8px', marginBottom: '10px'}}>
+                                    <strong style={{color: '#F5C842'}}>7. Final Preparation</strong><br/>
+                                    Breathe: 2 nose in, 1 mouth out, 4 cycles. Spike up. You're ready!
+                                </li>
+                            </ol>
+                        </div>
+                        
+                        <div className="card">
+                            <h3 style={{color: '#F5C842', fontSize: '28px', marginBottom: '20px'}}>Between Attempts Protocol</h3>
+                            <div style={{padding: '20px', background: '#1A1A1A', borderRadius: '12px'}}>
+                                <p style={{color: '#CCC', lineHeight: '1.8', fontSize: '15px'}}>
+                                    • Sit or stand tall - maintain good posture<br/>
+                                    • Breathing: 2 slow breaths in through nose, 1 long breath out through mouth<br/>
+                                    • Shake arms to stay loose<br/>
+                                    • Visualize first 3 steps with crisp execution<br/>
+                                    • NO static stretching - maintain elasticity<br/>
+                                    • Light walking if more than 10 minutes between attempts<br/>
+                                    • Sip water/electrolytes as needed
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div className="success-box">
+                            <div className="success-title">✅ Testing Benchmarks (Every 2 Weeks)</div>
+                            <div className="warning-content">
+                                • 10 yard split time - Target: sub 1.65 seconds<br/>
+                                • Flying 10 - Target: sub 1.10 seconds<br/>
+                                • Broad jump - Target: 9'6" or better<br/>
+                                • Vertical jump - Target: 28" or better<br/>
+                                • Trap bar velocity - Monitor bar speed with app<br/>
+                                • Film side view for technique analysis
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            return (
+                <div>
+                    <nav className="nav">
+                        <div className="nav-content">
+                            <button 
+                                className={`nav-btn ${activeTab === 'dashboard' ? 'active' : ''}`} 
+                                onClick={() => setActiveTab('dashboard')}
+                            >
+                                Dashboard
+                            </button>
+                            <button 
+                                className={`nav-btn ${activeTab === 'training' ? 'active' : ''}`} 
+                                onClick={() => setActiveTab('training')}
+                            >
+                                Training Program
+                            </button>
+                            <button 
+                                className={`nav-btn ${activeTab === 'nutrition' ? 'active' : ''}`} 
+                                onClick={() => setActiveTab('nutrition')}
+                            >
+                                Nutrition System
+                            </button>
+                            <button 
+                                className={`nav-btn ${activeTab === 'combine' ? 'active' : ''}`} 
+                                onClick={() => setActiveTab('combine')}
+                            >
+                                Combine Prep
+                            </button>
+                        </div>
+                    </nav>
+                    
+                    {activeTab === 'dashboard' && <Dashboard />}
+                    {activeTab === 'training' && <Training />}
+                    {activeTab === 'nutrition' && <Nutrition />}
+                    {activeTab === 'combine' && <CombinePrep />}
+                </div>
+            );
+        };
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
